@@ -10,10 +10,10 @@ requirejs.config({
 });
 
 
-requirejs(["jquery", "bootstrap", "Playlist"], function($, bootstrap, Playlist) {
+requirejs(["jquery", "bootstrap", "PlaylistView"], function($, bootstrap, PlaylistView) {
     $(function(){
 
-        var playlist = new Playlist();
+        var playlist = new PlaylistView();
 
     });
 
