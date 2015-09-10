@@ -2,32 +2,31 @@ define(['jquery', 'Playlist'], function($, Playlist){
 
     var PlaylistView = function(){
         // initialize
-        this.playlist = Playlist;
+        this.playlist = new Playlist();
         this.listenAddSong();
-
-        this.updatePlaylist();
+        this.updatePlaylistDom();
+        //this.updatePlaylist();
 
     };
-    Playlist.prototype.listenAddSong = function(){
+    PlaylistView.prototype.listenAddSong = function(){
         var that = this;
         $('#addSongForm').on('submit', function(event){
-            that.addSong($('#song').val());
+            that.playlist.addSong($('#song').val());
+            that.updatePlaylistDom();
             $('#song').val('');
 
             return false;
         });
     };
-    Playlist.prototype.updatePlaylist = function() {
-        sessionStorage.setItem('playlist', JSON.stringify(this.playlist));
-        this.updatePlaylistDom();
-    };
-    Playlist.prototype.updatePlaylistDom = function(){
+
+    PlaylistView.prototype.updatePlaylistDom = function(){
         var that = this;
-        var playlistDom = this.playlist.map(function(song, index){
+        var playlistDom = this.playlist.playlist.map(function(song, index){
             var removeButton = document.createElement("button");
             removeButton.appendChild(document.createTextNode("remove"));
             $(removeButton).click(function(){
-                that.removeSong(index);
+                that.playlist.removeSong(index);
+                that.updatePlaylistDom();
             });
             $(removeButton).addClass("btn");
 
@@ -41,7 +40,7 @@ define(['jquery', 'Playlist'], function($, Playlist){
 
     };
 
-    return Playlist;
+    return PlaylistView;
 
 });
 
