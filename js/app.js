@@ -1,9 +1,8 @@
 requirejs.config({
-    baseUrl: 'js/vendors',
+    baseUrl: 'js',
     paths: {
-        "playlist": "../app/Playlist",
-        "jquery": "jquery.min",
-        "bootstrap": "bootstrap.min"
+        "jquery": "vendors/jquery.min",
+        "bootstrap": "vendors/bootstrap.min"
     },
     shim: {
         "bootstrap": ["jquery"]
@@ -11,12 +10,15 @@ requirejs.config({
 });
 
 
-requirejs(["jquery", "bootstrap", "playlist"], function($) {
-    //the jquery.alpha.js and jquery.beta.js plugins have been loaded.
-    $(function() {
-        console.log($('#addSongForm').text());
+requirejs(["jquery", "bootstrap", "Playlist"], function($, bootstrap, Playlist) {
+    $(function(){
+
+        var playlist = new Playlist();
+
     });
+
 });
 
 
 console.log('app.js');
+
