@@ -5,16 +5,15 @@ define(['jquery', 'Playlist'], function($, Playlist){
         this.playlist = new Playlist();
         this.listenAddSong();
         this.updatePlaylistDom();
-        //this.updatePlaylist();
 
     };
+
     PlaylistView.prototype.listenAddSong = function(){
         var that = this;
         $('#addSongForm').on('submit', function(event){
             that.playlist.addSong($('#song').val());
             that.updatePlaylistDom();
             $('#song').val('');
-
             return false;
         });
     };
